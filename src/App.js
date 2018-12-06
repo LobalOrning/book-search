@@ -1,28 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+import Home from './components/Page/Home/Home'
+import Search from './components/Page/Search/Search'
+import ErrorDisplay from './components/Page/Error/Error'
+import Author from './components/Page/Author/Author'
+import NoMatch from './components/Page/404/NoMatch'
 
-export default App;
+const App = () => (
+  <Router>
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to='/search'>Search</Link>
+          </li>
+          <li>
+            <Link to='/error'>Error display</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/search" component={Search} />
+        <Route path="/error" component={ErrorDisplay} />
+        <Route path="/author/:id" component={Author} />
+        <Route component={NoMatch} />
+      </Switch>
+    </div>
+  </Router>
+)
+
+export default App
